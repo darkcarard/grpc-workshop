@@ -1,0 +1,31 @@
+syntax = "proto3";
+package unary;
+option go_package = "./bidirectional/bidirectionalpb";
+
+message Attack {
+    uint32 damage = 1;
+}
+
+message Boss {
+    uint32 id = 1;
+    int32 health = 2;
+}
+
+message Player {
+    string name = 1;
+    int32 health = 2;
+}
+
+message AttackBossRequest {
+    Attack attack = 1;
+    uint32 bossID = 2;
+}
+
+message AttackBossResponse {
+    Boss boss = 1;
+    Player player = 2;
+}
+
+service BidirectionalService {
+    rpc AttackBoss(stream AttackBossRequest) returns (stream AttackBossResponse) {};
+}

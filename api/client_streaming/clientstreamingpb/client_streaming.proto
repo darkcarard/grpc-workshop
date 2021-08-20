@@ -1,0 +1,25 @@
+syntax = "proto3";
+package unary;
+option go_package = "./client_streaming/clientstreamingpb";
+
+message Attack {
+    uint32 damage = 1;
+}
+
+message Boss {
+    uint32 id = 1;
+    int32 health = 2;
+}
+
+message ClientStreamingRequest {
+    uint32 bossID = 1;
+    Attack attack = 2;
+}
+
+message ClientStreamingResponse {
+    Boss boss = 1;
+}
+
+service ClientStreamingService {
+    rpc AttackBoss(stream ClientStreamingRequest) returns (ClientStreamingResponse) {};
+}
